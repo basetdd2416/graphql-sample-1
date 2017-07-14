@@ -124,7 +124,7 @@ const mutation = new GraphQLObjectType({
             type: UserType,
             args: {
                 id: {
-                    type: GraphQLString
+                    type: new GraphQLNonNull(GraphQLString)
                 }
             },
             resolve(parentValue, {
@@ -139,7 +139,7 @@ const mutation = new GraphQLObjectType({
             type: UserType,
             args: {
                 id: {
-                    type: GraphQLString
+                    type: new GraphQLNonNull(GraphQLString)
                 },
                 firstName: {
                     type: GraphQLString
