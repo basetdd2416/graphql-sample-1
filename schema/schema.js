@@ -4,14 +4,15 @@ const {
     GraphQLObjectType,
     GraphQLString,
     GraphQLInt,
+    GraphQLList,
     GraphQLSchema
 } = graphql;
 
 const BASE_API_URI = "http://localhost:3000";
 
-const CompanyType =  new GraphQLObjectType({
+const CompanyType = new GraphQLObjectType({
     name: 'Company',
-    fields: {
+    fields: () => ({
         id: {
             type: GraphQLString
         },
@@ -20,8 +21,16 @@ const CompanyType =  new GraphQLObjectType({
         },
         description: {
             type: GraphQLString
+        },
+        users: {
+            type: new GraphQLList(UserType),
+            resolve(parentValue, args) {
+                return axios.get(`${BASE_API_URI}/companies/${parentValue.id}/users`)
+                    .then(resp => resp.data)
+                    .catch(err => err)
+            }
         }
-    }
+    })
 })
 
 const UserType = new GraphQLObjectType({
@@ -38,10 +47,10 @@ const UserType = new GraphQLObjectType({
         },
         company: {
             type: CompanyType,
-            resolve(parentValue,args) {
-                return axios.get(`${BASE_API_URI}/companies/${parentValue.companyId}`)
-                .then(resp => resp.data)
-                .catch(err => err);
+            resolve(parentValue, args) {
+                return axios.get(`${BASE_API_URI}/companies/${parentValue.id}`)
+                    .then(resp => resp.data)
+                    .catch(err => err);
             }
         }
     }
@@ -72,10 +81,10 @@ const RootQuery = new GraphQLObjectType({
                     type: GraphQLString
                 }
             },
-            resolve(parentValue,args) {
+            resolve(parentValue, args) {
                 return axios.get(`${BASE_API_URI}/companies/${args.id}`)
-                .then(resp => resp.data)
-                .catch(err => err);
+                    .then(resp => resp.data)
+                    .catch(err => err);
             }
         }
     }
