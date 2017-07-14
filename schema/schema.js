@@ -1,5 +1,4 @@
 const graphql = require('graphql');
-const _ = require('lodash');
 const axios = require('axios');
 const {
     GraphQLObjectType,
@@ -7,6 +6,8 @@ const {
     GraphQLInt,
     GraphQLSchema
 } = graphql;
+
+const BASE_API_URI = "http://localhost:3000";
 
 const users = [{
         id: '23',
@@ -46,9 +47,9 @@ const RootQuery = new GraphQLObjectType({
                 }
             },
             resolve(parentValue, args) {
-                return _.find(users, {
-                    id: args.id
-                })
+                return axios.get(`${BASE_API_URI}/users/${args.id}`)
+                .then(resp => resp.data)
+                .catch(err => err)
             }
         }
 
