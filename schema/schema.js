@@ -119,6 +119,47 @@ const mutation = new GraphQLObjectType({
                     .then(resp => resp.data)
                     .catch(err => err);
             }
+        },
+        deleteUser: {
+            type: UserType,
+            args: {
+                id: {
+                    type: GraphQLString
+                }
+            },
+            resolve(parentValue, {
+                id
+            }) {
+                return axios.delete(`${BASE_API_URI}/users/${id}`)
+                    .then(resp => resp.data)
+                    .catch(err => err);
+            }
+        },
+        editUser: {
+            type: UserType,
+            args: {
+                id: {
+                    type: GraphQLString
+                },
+                firstName: {
+                    type: GraphQLString
+                },
+                age: {
+                    type: GraphQLInt
+                }
+            },
+            resolve(parentValue, {
+                id,
+                firstName,
+                age
+            }) {
+                return axios.put(`${BASE_API_URI}/users/${id}`, {
+                        firstName,
+                        age
+                    })
+                    .then(resp => resp.data)
+                    .catch(err => err);
+            }
         }
     }
 });
