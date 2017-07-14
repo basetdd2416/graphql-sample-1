@@ -1,42 +1,62 @@
 {
-    "posts": [{
-        "id": 1,
-        "title": "json-server",
-        "author": "typicode"
-    }],
-    "comments": [{
-        "id": 1,
-        "body": "some comment",
-        "postId": 1
-    }],
-    "profile": {
-        "name": "typicode"
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  },
+  "users": [
+    {
+      "id": "23",
+      "firstName": "apisit",
+      "age": 30,
+      "companyId": "1"
     },
-    "users": [{
-            "id": "23",
-            "firstName": "apisit",
-            "age": 30,
-            "companyId": "1"
-        },
-        {
-            "id": "24",
-            "firstName": "sin",
-            "age": 55,
-            "companyId": "2" 
-        },
-        {
-            "id": "25",
-            "firstName": "ball",
-            "companyId": "1"
-        },
-        {
-            "id": "26",
-            "firstName": "ppp",
-            "companyId": "2"
-        }
-    ],
-    "companies": [
-        {"id": "1", "name": "Apple", "description": "apple company description"},
-        {"id": "2", "name": "Goole", "description": "goole company description"}
-    ]
+    {
+      "id": "24",
+      "firstName": "sin",
+      "age": 55,
+      "companyId": "2"
+    },
+    {
+      "id": "25",
+      "firstName": "ball",
+      "age": 33,
+      "companyId": "1"
+    },
+    {
+      "id": "26",
+      "firstName": "ppp",
+      "age": 44,
+      "companyId": "2"
+    },
+    {
+      "firstName": "john",
+      "age": 44,
+      "id": "rkWXRbLBZ"
+    }
+  ],
+  "companies": [
+    {
+      "id": "1",
+      "name": "Apple",
+      "description": "apple company description"
+    },
+    {
+      "id": "2",
+      "name": "Goole",
+      "description": "goole company description"
+    }
+  ]
 }
