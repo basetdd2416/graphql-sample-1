@@ -15,12 +15,18 @@
     "users": [{
             "id": "23",
             "firstName": "apisit",
-            "age": 30
+            "age": 30,
+            "companyId": "1"
         },
         {
             "id": "50",
             "firstName": "sin",
-            "age": 55
+            "age": 55,
+            "companyId": "2" 
         }
+    ],
+    "companies": [
+        {"id": "1", "name": "Apple", "description": "apple company description"},
+        {"id": "2", "name": "Goole", "description": "goole company description"}
     ]
 }

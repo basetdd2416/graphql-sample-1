@@ -9,18 +9,6 @@ const {
 
 const BASE_API_URI = "http://localhost:3000";
 
-const users = [{
-        id: '23',
-        firstName: 'apisit',
-        age: 30
-    },
-    {
-        id: '50',
-        firstName: 'sin',
-        age: 55
-    }
-]
-
 const UserType = new GraphQLObjectType({
     name: 'User',
     fields: {
@@ -36,6 +24,21 @@ const UserType = new GraphQLObjectType({
     }
 });
 
+const CompanyType = new GraphQLObjectType({
+    name: 'Company',
+    fields: {
+        id: {
+            type: GraphQLString
+        },
+        name: {
+            type: GraphQLString
+        },
+        description: {
+            type: GraphQLString
+        }
+    }
+})
+
 const RootQuery = new GraphQLObjectType({
     name: 'RootQueryType',
     fields: {
@@ -48,8 +51,8 @@ const RootQuery = new GraphQLObjectType({
             },
             resolve(parentValue, args) {
                 return axios.get(`${BASE_API_URI}/users/${args.id}`)
-                .then(resp => resp.data)
-                .catch(err => err)
+                    .then(resp => resp.data)
+                    .catch(err => err)
             }
         }
 
