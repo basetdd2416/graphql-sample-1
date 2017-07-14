@@ -9,22 +9,7 @@ const {
 
 const BASE_API_URI = "http://localhost:3000";
 
-const UserType = new GraphQLObjectType({
-    name: 'User',
-    fields: {
-        id: {
-            type: GraphQLString
-        },
-        firstName: {
-            type: GraphQLString
-        },
-        age: {
-            type: GraphQLInt
-        }
-    }
-});
-
-const CompanyType = new GraphQLObjectType({
+const CompanyType =  new GraphQLObjectType({
     name: 'Company',
     fields: {
         id: {
@@ -38,6 +23,31 @@ const CompanyType = new GraphQLObjectType({
         }
     }
 })
+
+const UserType = new GraphQLObjectType({
+    name: 'User',
+    fields: {
+        id: {
+            type: GraphQLString
+        },
+        firstName: {
+            type: GraphQLString
+        },
+        age: {
+            type: GraphQLInt
+        },
+        company: {
+            type: CompanyType,
+            resolve(parentValue,args) {
+                return axios.get(`${BASE_API_URI}/companies/${parentValue.companyId}`)
+                .then(resp => resp.data)
+                .catch(err => err);
+            }
+        }
+    }
+});
+
+
 
 const RootQuery = new GraphQLObjectType({
     name: 'RootQueryType',
@@ -54,8 +64,20 @@ const RootQuery = new GraphQLObjectType({
                     .then(resp => resp.data)
                     .catch(err => err)
             }
+        },
+        company: {
+            type: CompanyType,
+            args: {
+                id: {
+                    type: GraphQLString
+                }
+            },
+            resolve(parentValue,args) {
+                return axios.get(`${BASE_API_URI}/companies/${args.id}`)
+                .then(resp => resp.data)
+                .catch(err => err);
+            }
         }
-
     }
 })
 
